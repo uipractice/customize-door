@@ -41,7 +41,7 @@
 
     <main class="main-content-wrapper">
       <nav class="navigation">
-        <div class="nav-container">
+        <div class="nav-container hide-mobile">
           <a href="#" class="home-link">Return to Home</a>
           <div class="steps-container">
             <div class="step completed">
@@ -63,7 +63,19 @@
           </div>
           <div class="nav-divider"></div>
         </div>
+
+          <div class="dropdown dropdown-mobile">
+          <div class="dropdown-select" id="selected-item" style="color: green;">2 Visualize your home</div>
+          <div class="dropdown-content" id="dropdown-menu">
+            <a href="#">1 Choose from stock homes</a>        
+            <a href="#">3 Option</a>
+            <a href="#">4 Customize Door</a>
+            <a href="#">5 Request Quote</a>
+
+          </div>
+        </div>
       </nav>
+
 
       <section class="content-container">
         <header class="content-header">
@@ -353,11 +365,41 @@
     </main>
 
     <footer class="footer">
-      <button class="default-button">Proceed with Default Settings</button>
+      <button class="default-button hide-mobile">Proceed with Default Settings</button>
       <div class="action-buttons">
         <button class="previous-button">Previous</button>
         <button class="continue-button">Continue</button>
       </div>
+      <a href="" class="show-mobile">Proceed with Default Settings</a>
     </footer>
+    <script>
+      const dropdown = document.querySelector('.dropdown');
+      const selectedItem = document.getElementById('selected-item');
+      const dropdownMenu = document.getElementById('dropdown-menu');
+    
+      // Close the dropdown when clicking outside
+      document.addEventListener('click', (event) => {
+        if (!dropdown.contains(event.target)) {
+          dropdownMenu.style.display = 'none';
+        }
+      });
+    
+      // Toggle dropdown on click
+      selectedItem.addEventListener('click', (event) => {
+        event.stopPropagation();
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      });
+    
+      // Handle item selection
+      const options = document.querySelectorAll('.dropdown-content a');
+      options.forEach(option => {
+        option.addEventListener('click', (event) => {
+          event.preventDefault();
+          selectedItem.textContent = option.textContent;
+          dropdownMenu.style.display = 'none';
+        });
+      });
+    </script>
+  
   </body>
 </html>
